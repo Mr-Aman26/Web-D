@@ -3,14 +3,13 @@ const mongoose = require ("mongoose");
 const app = express();
 const authRoutes = require('./routes/authRoutes');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
+
+const cors=require('cors');
 
 
 app.use(cors({
     origin:"http://localhost:3000",
 }));
-
 
 // app.use (express.static('public'));
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import basestyle from "../Base.module.css";
 import loginstyle from "./login.module.css";
 
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 const Login = ({ setUserState }) => {
     const navigate = useNavigate();
@@ -47,12 +47,11 @@ const Login = ({ setUserState }) => {
     useEffect(() => {
         if (Object.keys(formErrors).length === 0 && isSubmit) {
             console.log(user);
-            alert(user);
-            // axios.post("http://localhost:3000/profile", user).then((res) => {
-            //     alert(res.data.message);
-            // setUserState(res.data.user);
+            axios.post("http://localhost:4000/login", user).then((res) => {
+                alert(res.data.message);
+            setUserState(res.data.user);
             navigate("/p", { replace: true });
-            // });
+            });
         }
     }, [formErrors]);
     return (
