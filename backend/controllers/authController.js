@@ -66,6 +66,8 @@ module.exports.signup_post = async (req, res) => {
 
 module.exports.login_post=async (req,res)=>{
     const { email, password } = req.body;
+    console.log('hiii login post');
+    console.log(req.body);
 
     try {
       const user1 = await user.login(email, password);

@@ -3,6 +3,13 @@ const mongoose = require ("mongoose");
 const app = express();
 const authRoutes = require('./routes/authRoutes');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+
+
+app.use(cors({
+    origin:"http://localhost:3000",
+}));
 
 
 // app.use (express.static('public'));
@@ -15,12 +22,13 @@ mongoose.connect (dbURI, { useNewUrlParser : true, useUnifiedTopology: true})
 .catch((err) => console . log(err));
 
 
-app.get('*', checkUser);
+// app.get('*', checkUser);
 app.get('/', (req, res) => res.render('home'));
-app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));
 
 app.use(express.json());
-app.use(authRoutes);
-
+// app.use(authRoutes);
+app.use(cookieParser());
 // app.listen(4000);
+
+app.post('/login',(req,res)=>res.render('home'));
 
