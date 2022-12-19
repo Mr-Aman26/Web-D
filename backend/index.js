@@ -29,11 +29,33 @@ mongoose.connect (dbURI, { useNewUrlParser : true, useUnifiedTopology: true})
 const client = new MongoClient(dbURI);
 
 
+const category=async function(req,res){
+    const page=(req.path.replace('/',''));
+    const database = client.db("Footox");
+    const users = database.collection("allproducts");
+    const product_data = await users.find({category:page}).toArray(function(err, result) {
+        if (err) throw err;
+        res.json(result); 
+    });
+}
+
+
+const productGender=async function(req,res){
+    const page=(req.path.replace('/',''));
+    const database = client.db("Footox");
+    const users = database.collection("allproducts");
+    const product_data = await users.find({gender:page.toUpperCase()}).toArray(function(err, result) {
+        if (err) throw err;
+        res.json(result); 
+    });
+}
+
+
 const product=async function(toUpdate,res){
     //console.log('hello',req);
     const database = client.db("Footox");
     const users = database.collection("allproducts");
-    if(toUpdate.length==2){
+    if(toUpdate != null && toUpdate.payload){
         const filter = { id: toUpdate.id };
         const updateDoc = {
             $set: toUpdate.payload,
@@ -42,13 +64,18 @@ const product=async function(toUpdate,res){
     
     }
 
+    else if(toUpdate != null && toUpdate.id){
+        users.deleteOne( { id: toUpdate.id } )
+        console.log('deleted');
+    }
+
     const product_data = await users.find({}).toArray(function(err, result) {
         if (err) throw err;
         //console.log(result);
         res.json(result); 
     });
     
-    
+    return;
 
         
 }
@@ -59,6 +86,15 @@ app.get('/', (req, res) => res.render('home'));
 app.use(express.static('public/css'));
 app.get('/admin1',(req,res)=>
     product(null,res))
+
+app.get('/men',(req,res)=>
+productGender(req,res))
+
+app.get('/women',(req,res)=>
+productGender(req,res))
+
+app.get('/shoes',(req,res)=>
+category(req,res))
 
 app.post('/admin1', urlencodedParser, function (req, res) {  
     console.log('hello');

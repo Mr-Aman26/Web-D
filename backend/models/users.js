@@ -6,6 +6,10 @@ const bcrypt = require('bcrypt');
 
 
 const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true,'Please enter a name']
+  },
   email: {
     type: String,
     required: [true, 'Please enter an email'],
@@ -18,6 +22,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please enter a password'],
     minlength: [6, 'Minimum password length is 6 characters'],
+  },
+  username: {
+    type: String,
+    required: [true, 'Please enter a username'],
+    
+  },
+  mobile: {
+    type: String,
+    required: [true, 'Please enter a mobile number'],
+    minlength: [10, 'Minimum password length is 10 digits'],
+  },
+  description: {
+    type: String,
+    required: [false],
+    
   }
   
 });
@@ -44,6 +63,6 @@ throw Error('incorrect email');
 };  
 
 
-const User = mongoose.model('Login_Detail', userSchema);
+const User = mongoose.model('login_details', userSchema);
 
 module.exports = User;
