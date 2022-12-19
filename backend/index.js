@@ -8,6 +8,9 @@ const cors=require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
+=======
+
+const cors=require('cors');
 
 
 app.use(cors({
