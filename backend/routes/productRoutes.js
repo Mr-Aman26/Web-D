@@ -1,4 +1,6 @@
 const {Router}=require('express');
+const bodyParser = require('body-parser');
+
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 const productController=require('../controllers/productController');
@@ -23,6 +25,5 @@ router.post('/admin2', urlencodedParser, function (req, res) {
     productController.adminAdd_post(toAdd,res);
     
 });
-
 
 module.exports=router;
