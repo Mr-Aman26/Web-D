@@ -9,6 +9,9 @@ const cookieParser=require('cookie-parser');
 const cors=require('cors');
 
 
+const cors=require('cors');
+
+
 app.use(cors({
     origin:"http://localhost:3000",
 }));
