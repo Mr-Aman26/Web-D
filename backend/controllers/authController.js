@@ -89,20 +89,4 @@ module.exports.login_post = async (req, res) => {
 module.exports.logout_get = (req, res) => {
   res.cookie('jwt', '', { maxAge: 1 });
   res.redirect('/');
-=======
-module.exports.login_post=async (req,res)=>{
-    const { email, password } = req.body;
-
-
-    try {
-      const user1 = await user.login(email, password);
-      const token = createToken(user1._id);
-      res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-      res.status(200).json({ user: user1._id });
-      
-    } catch (err) {
-      res.status(400).json({err:err.message});
-      
-    }
-
 }
