@@ -6,7 +6,6 @@ const productRoutes = require('./routes/productRoutes');
 const couponRoutes = require('./routes/couponRoutes');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 const cookieParser=require('cookie-parser');
-const cors=require('cors');
 
 
 const cors=require('cors');
