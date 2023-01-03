@@ -3,10 +3,10 @@ const mongoose = require ("mongoose");
 const app = express();
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
+const couponRoutes = require('./routes/couponRoutes');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 const cookieParser=require('cookie-parser');
 const cors=require('cors');
-const bodyParser = require('body-parser');
 
 
 app.use(cors({
@@ -30,5 +30,6 @@ app.use(express.static('public/css'));
 
 app.use(express.json());
 app.use(authRoutes);
+app.use(couponRoutes);
 app.use(productRoutes);
 app.use(cookieParser());
