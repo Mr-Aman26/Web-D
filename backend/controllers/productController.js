@@ -6,11 +6,10 @@ const dbURI= 'mongodb+srv://sanchit:diehardfan@cluster0.lxmxcq5.mongodb.net/Foot
 const client = new MongoClient(dbURI);
 
 
-
 const product=async function(toUpdate,res){
     //console.log('hello',req);
     const database = client.db("Footox");
-    const users = database.collection("allproducts");
+    const users = database.collection("data");
     if(toUpdate != null && toUpdate.payload){
         const filter = { id: toUpdate.id };
         const updateDoc = {
@@ -60,28 +59,6 @@ const category=async function(req,res){
 }
 
 
-
-
-const addProduct=async function(toAdd,res){
-    //console.log('hello',req);
-    const database = client.db("Footox");
-    const users = database.collection("allproducts");
-    if(toAdd){
-        const result1 = await users.insertOne(toAdd.details)||"";
-    
-    }
-
-    const product_data = await users.find({}).toArray(function(err, result1) {
-        if (err) throw err;
-        console.log(result1);
-        res.json(result1); 
-    });
-};
-
-
-
-
-
 module.exports.admin_get = (req, res) => {
     product(null,res);
 }
@@ -100,8 +77,8 @@ module.exports.admin_post = async (toUpdate, res) => {
  
 }
 
-module.exports.adminAdd_post = async (toAdd, res) => {
-    addProduct(toAdd,res)
- 
-}
+// module.exports.adminAdd_post = async (toAdd, res) => {
+//     addProduct(toAdd,res)
+// }
+
 
