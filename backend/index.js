@@ -3,6 +3,7 @@ const mongoose = require ("mongoose");
 const app = express();
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
+const bannerRoutes = require('./routes/bannerRoutes');
 const userRoutes = require('./routes/userRoutes');
 const couponRoutes = require('./routes/couponRoutes');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
@@ -12,10 +13,13 @@ const cookieParser=require('cookie-parser');
 const cors=require('cors');
 
 
-app.use(cors({
-    origin:"http://localhost:3000",
-}));
+// app.use(cors({
+//     origin:"http://localhost:3000",
+// }));
 
+app.use(cors({
+    origin:["http://localhost:3001","http://localhost:3000"],
+}));
 
 app.set('view engine', 'ejs');
 
@@ -35,5 +39,6 @@ app.use(express.json());
 app.use(authRoutes);
 app.use(couponRoutes);
 app.use(productRoutes);
+app.use(bannerRoutes);
 app.use(userRoutes);
 app.use(cookieParser());
