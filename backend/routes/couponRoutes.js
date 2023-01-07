@@ -27,6 +27,14 @@ router.post('/coupon', urlencodedParser, function (req, res) {
     
 });
 
+router.post('/couponOne', urlencodedParser, function (req, res) {  
+    const obj=JSON.parse(JSON.stringify(req.body));
+    const jsondata= Object.keys(obj)[0];
+    const toAdd=JSON.parse((jsondata));
+    couponController.coupon_post(toAdd,res);
+    
+});
+
 router.get('/coupon', urlencodedParser, function (req, res) {
     couponController.coupon_get(req.query,res);    
 });
@@ -39,8 +47,8 @@ router.post('/couponDisc', urlencodedParser, function (req, res) {
     
 });
 
-router.get('/couponApplied/:code', urlencodedParser, function (req, res) {
-    couponController.coupon_applied(req.params.code,req.body,res);    
+router.get('/couponApplied', urlencodedParser, function (req, res) {
+    couponController.coupon_applied(req.body,res);    
 });
 
 module.exports=router;
